@@ -1,0 +1,23 @@
+[tools]
+go = '1.27.4'
+golangci-lint = '2.14.0'
+vale = '3.25.1'
+
+# Points git at the tracked hooks in .githooks (commit message linting)
+# and fetches the Vale packages they use.
+[tasks.setup]
+description = "Install git hooks and Vale packages"
+run = [
+  "git config core.hooksPath .githooks",
+  "vale sync",
+]
+
+# Everything CI checks, on the pinned toolchain.
+[tasks.check]
+description = "Format check, unit tests, lint and vulnerability scan"
+run = [
+  'test -z "$(gofmt -l .)" || { gofmt -l .; echo "gofmt: the files above need formatting" >&2; exit 1; }',
+  "go test -race ./...",
+  "golangci-lint run",
+  "go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 ./...",
+]
