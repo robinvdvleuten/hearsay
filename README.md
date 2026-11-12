@@ -1,8 +1,8 @@
-# postscout
+# hearsay
 
-postscout is a Go package that finds a provider's IMAP and CalDAV servers from an email address, the way a mail client does when you set up an account. Your users type their address, and you get a mail server and a calendar server to show them, each with where it was found. It never follows a link to plain HTTP, never sends the email address anywhere, and lets you turn off the one lookup that tells a third party the domain.
+hearsay is a Go package that finds a provider's IMAP and CalDAV servers from an email address, the way a mail client does when you set up an account. Your users type their address, and you get a mail server and a calendar server to show them, each with where it was found. It never follows a link to plain HTTP, never sends the email address anywhere, and lets you turn off the one lookup that tells a third party the domain.
 
-> **Discovery answers are not to be trusted.** They come from DNS and websites, and an attacker may control either. Show the servers you found to the user, and get their confirmation before you send a password to them. Otherwise the password goes wherever an attacker said.
+> **Discovery answers are hearsay, hence the name.** They come from DNS and websites, and an attacker may control either. Show the servers you found to the user, and get their confirmation before you send a password to them. Otherwise the password goes wherever an attacker said.
 
 - **Many sources, in a fixed order.** Built-in presets for mailbox.org, Fastmail and Posteo, Thunderbird autoconfig files, Mozilla's ISPDB, DNS SRV and TXT records (RFC 6186 and RFC 6764) and the `/.well-known/caldav` URL. When nothing knows the mail server, it guesses `imap.<domain>:993` and says so.
 - **Encrypted only.** Every URL it follows is HTTPS, a redirect to plain HTTP is refused, and only IMAP servers that use TLS or STARTTLS are returned. Plain HTTP is allowed to this machine only, for tests.
@@ -13,7 +13,7 @@ postscout is a Go package that finds a provider's IMAP and CalDAV servers from a
 - **No dependencies** outside the standard library.
 
 ```go
-result, err := postscout.Discover(ctx, "jane@example.org", postscout.Options{})
+result, err := hearsay.Discover(ctx, "jane@example.org", hearsay.Options{})
 if err != nil {
 	return err
 }
@@ -35,7 +35,7 @@ It was extracted from [pim-mcp](https://github.com/robinvdvleuten/pim-mcp), wher
 You need Go 1.26 or later.
 
 ```bash
-go get github.com/robinvdvleuten/postscout
+go get github.com/robinvdvleuten/hearsay
 ```
 
 ## Usage
@@ -45,8 +45,8 @@ go get github.com/robinvdvleuten/postscout
 If you already know one of the servers, ask for the other alone:
 
 ```go
-imap, err := postscout.DiscoverIMAP(ctx, email, opts)
-caldav, err := postscout.DiscoverCalDAV(ctx, email, opts)
+imap, err := hearsay.DiscoverIMAP(ctx, email, opts)
+caldav, err := hearsay.DiscoverCalDAV(ctx, email, opts)
 ```
 
 `DiscoverCalDAV` returns an error wrapping `ErrNotFound` when it finds no server that answers WebDAV.

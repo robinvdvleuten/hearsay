@@ -1,4 +1,4 @@
-package postscout
+package hearsay
 
 import (
 	"context"
@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/robinvdvleuten/postscout/internal/transport"
+	"github.com/robinvdvleuten/hearsay/internal/transport"
 )
 
 // DiscoverIMAP tries a preset, the provider's autoconfig file, Mozilla's ISPDB

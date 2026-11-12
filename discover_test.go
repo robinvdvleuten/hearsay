@@ -1,4 +1,4 @@
-package postscout
+package hearsay
 
 import (
 	"context"

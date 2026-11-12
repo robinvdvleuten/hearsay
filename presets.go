@@ -1,4 +1,4 @@
-package postscout
+package hearsay
 
 // preset holds the servers of a provider whose servers are known. Its IMAP
 // server uses implicit TLS. Self-hosted servers need none, because they answer

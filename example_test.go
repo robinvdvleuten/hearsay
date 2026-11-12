@@ -1,4 +1,4 @@
-package postscout_test
+package hearsay_test
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/robinvdvleuten/postscout"
+	"github.com/robinvdvleuten/hearsay"
 )
 
 // offlineDNS stands in for a domain's DNS in these examples, so they need no
@@ -48,7 +48,7 @@ func (offlineWeb) RoundTrip(req *http.Request) (*http.Response, error) {
 }
 
 func ExampleDiscover() {
-	result, err := postscout.Discover(context.Background(), "jane@example.org", postscout.Options{
+	result, err := hearsay.Discover(context.Background(), "jane@example.org", hearsay.Options{
 		Resolver:  offlineDNS{},
 		Transport: offlineWeb{},
 	})
@@ -70,7 +70,7 @@ func ExampleDiscover() {
 
 func ExampleDiscoverIMAP() {
 	// A provider with a built-in preset is answered without a single lookup.
-	imap, err := postscout.DiscoverIMAP(context.Background(), "jane@fastmail.com", postscout.Options{})
+	imap, err := hearsay.DiscoverIMAP(context.Background(), "jane@fastmail.com", hearsay.Options{})
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -80,7 +80,7 @@ func ExampleDiscoverIMAP() {
 }
 
 func ExampleDiscoverCalDAV() {
-	caldav, err := postscout.DiscoverCalDAV(context.Background(), "jane@example.org", postscout.Options{
+	caldav, err := hearsay.DiscoverCalDAV(context.Background(), "jane@example.org", hearsay.Options{
 		Resolver:  offlineDNS{},
 		Transport: offlineWeb{},
 	})

@@ -1,4 +1,4 @@
-// Package postscout finds a provider's IMAP and CalDAV servers from an email
+// Package hearsay finds a provider's IMAP and CalDAV servers from an email
 // address, the way a mail client does when you set up an account.
 //
 // It tries built-in presets, then what the domain publishes: Thunderbird
@@ -11,7 +11,7 @@
 // no login is tried. The answers come from DNS and websites that an attacker
 // may control, so show the servers to the user and get their confirmation
 // before a password is sent to them.
-package postscout
+package hearsay
 
 import (
 	"context"

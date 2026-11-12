@@ -1,4 +1,4 @@
-package postscout
+package hearsay
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/robinvdvleuten/postscout/internal/transport"
+	"github.com/robinvdvleuten/hearsay/internal/transport"
 )
 
 const wellKnownCalDAV = "/.well-known/caldav"
