@@ -1,0 +1,23 @@
+name: Release Please
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  # Keeps a release PR open from the Conventional Commits on main. Merging it
+  # tags the version and creates the GitHub release, which is all a Go module
+  # needs to be published.
+  release-please:
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: googleapis/release-please-action@v5.0.0
+        with:
+          config-file: .github/release-please-config.json
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}

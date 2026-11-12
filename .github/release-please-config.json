@@ -1,0 +1,8 @@
+{
+  "release-type": "go",
+  "bump-minor-pre-major": true,
+  "pull-request-title-pattern": "chore: release ${version}",
+  "packages": {
+    ".": {}
+  }
+}
