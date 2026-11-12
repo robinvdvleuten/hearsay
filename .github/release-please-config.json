@@ -4,5 +4,6 @@
   "pull-request-title-pattern": "chore: release ${version}",
   "packages": {
     ".": {}
-  }
+  },
+  "initial-version": "0.1.0"
 }
